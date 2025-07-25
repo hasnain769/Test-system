@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functional Tests Assessment System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tests Assessment System</h1>
+        <p>Enter the results for each test below to receive an instant analysis and personalized recommendations.</p>
+        
+        <form id="calculator-form">
+            <!-- Test 1: Cardiorespiratory Endurance -->
+            <fieldset>
+                <legend>Test 1: Air Element - Cardiorespiratory Endurance (Stange Test)</legend>
+                <div class="form-group">
+                    <label for="test1-stange">Time (in seconds):</label>
+                    <input type="number" id="test1-stange" min="0" required>
+                </div>
+            </fieldset>
+
+            <!-- Test 2: Strength -->
+            <fieldset>
+                <legend>Test 2: Fire Element - Strength (Dynamometer)</legend>
+                 <div class="form-group">
+                    <label for="test2-gender">Gender:</label>
+                    <select id="test2-gender" required>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="test2-right">Right Hand Strength (kg):</label>
+                        <input type="number" id="test2-right" step="0.1" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="test2-left">Left Hand Strength (kg):</label>
+                        <input type="number" id="test2-left" step="0.1" min="0" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Test 3: Cardio Test -->
+            <fieldset>
+                <legend>Test 3: Fire Element - Leg Swings (Muscle Endurance)</legend>
+                <div class="form-group">
+                    <label for="test3-pulse">Pulse Zone Reached (% of Max HR):</label>
+                     <select id="test3-pulse" required>
+                        <option value="95">Zone 90-100%</option>
+                        <option value="80">Zone 80%</option>
+                        <option value="65">Zone 60-70%</option>
+                        <option value="45">Zone <50%</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- Test 4: Flexibility -->
+            <fieldset>
+                <legend>Test 4: Water Element - Flexibility Test</legend>
+                <div class="sub-test">
+                    <p>A) Leg Flexibility</p>
+                    <div class="form-group">
+                        <label for="test4a-legs">Furthest Reach:</label>
+                        <select id="test4a-legs" required>
+                            <option value="25">Reach to the knee</option>
+                            <option value="50">Reach to the shin and foot</option>
+                            <option value="75">Reach to the floor with fists</option>
+                            <option value="100">Reach to the floor with palms and below</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sub-test">
+                    <p>B) Arm/Shoulder Flexibility</p>
+                     <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="test4b-right">Right Arm Reach:</label>
+                            <select id="test4b-right" required>
+                                <option value="25">Fingers don't touch (large gap)</option>
+                                <option value="50">Fingers don't touch (small gap)</option>
+                                <option value="75">Fingers touch</option>
+                                <option value="100">Fingers overlap / Palms touch</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="test4b-left">Left Arm Reach:</label>
+                            <select id="test4b-left" required>
+                                <option value="25">Fingers don't touch (large gap)</option>
+                                <option value="50">Fingers don't touch (small gap)</option>
+                                <option value="75">Fingers touch</option>
+                                <option value="100">Fingers overlap / Palms touch</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Test 5: Balance -->
+            <fieldset>
+                <legend>Test 5: Earth Element - Balance Test</legend>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="test5-right">Right Leg Balance (seconds):</label>
+                        <input type="number" id="test5-right" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="test5-left">Left Leg Balance (seconds):</label>
+                        <input type="number" id="test5-left" min="0" required>
+                    </div>
+                </div>
+            </fieldset>
+            
+            <button type="submit" class="calculate-btn">Calculate Results 🔢</button>
+        </form>
+
+        <div id="results-container" class="hidden">
+            <!-- Results will be injected here by JavaScript -->
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

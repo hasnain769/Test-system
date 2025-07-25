@@ -1,0 +1,131 @@
+Getting Started with the Functional Tests Calculator: A Simple Guide
+
+Welcome! This guide will show you how to set up and use the Functional Tests Calculator on your own computer. Don't worry, it’s very easy and there are no complicated steps.
+
+Part 1: What You Need (Dependencies)
+
+The calculator is a simple web page. The only "dependency" or special software you need is a modern web browser.
+
+You almost certainly already have one installed on your computer! Here are the most common ones:
+
+Icon	Name
+<img src="https://i.imgur.com/2mjHe5I.png" width="25">	Google Chrome
+<img src="https://i.imgur.com/K1x521T.png" width="25">	Mozilla Firefox
+<img src="https://i.imgur.com/83Uv9w3.png" width="25">	Microsoft Edge
+<img src="https://i.imgur.com/KzF2Z5x.png" width="25">	Apple Safari (on Mac)
+
+✅ Action: You don't need to do anything if you already use one of these to browse the internet.
+
+If for some reason you don't have a modern browser, you can download one for free:
+
+Download Google Chrome: google.com/chrome
+
+Download Mozilla Firefox: mozilla.org/firefox
+
+Part 2: Download and Set Up the Calculator Files
+
+The calculator is made of three files that work together. You will likely receive them in a single compressed ZIP file. Your first step is to "unzip" this file.
+
+Step 1: Find the ZIP File
+
+Locate the downloaded file. It will probably be in your Downloads folder and have a name like functional-calculator.zip. The icon usually looks like a folder with a zipper on it.
+
+Step 2: Unzip the File
+
+On Windows:
+
+Right-click on the ZIP file.
+
+Choose "Extract All..." from the menu.
+
+A new window will pop up. Click the "Extract" button.
+
+On Mac:
+
+Simply double-click the ZIP file.
+
+Step 3: Check Your Files
+
+After extracting, a new, regular folder will be created. Open it.
+
+Inside, you should see these three files. It is very important that all three files are in the same folder together.
+
+index.html (This is the main file, it might have a browser icon)
+
+style.css (This file handles the colors and layout)
+
+script.js (This file does all the math)
+
+Part 3: How to Run the Calculator
+
+This is the easiest part!
+
+Open the folder containing the three files.
+
+Find the index.html file.
+
+Double-click on index.html.
+
+That's it! The file will open in your default web browser, and you will see the Functional Tests Assessment System page, ready to be used.
+
+Part 4: How to Use the Calculator
+
+Now that the calculator is open, here’s how to use it.
+
+1. Fill in the Test Results:
+
+Go through each of the 5 test sections on the page.
+
+For tests requiring a number (like time in seconds or strength in kg), type the number into the box.
+
+For tests with options (like flexibility reach), click the dropdown menu and choose the one that matches the result.
+
+Remember to select a Gender for the Strength test, as this changes the scoring.
+
+2. Calculate the Results:
+
+Once all fields are filled, scroll to the bottom.
+
+Click the big green button that says "Calculate Results 🔢".
+
+3. View the Report:
+
+The page will automatically show you a full report, including:
+
+Your Overall Score at the top.
+
+A Detailed Table with scores for each test.
+
+Personalized Recommendations for every single test, explaining what your results mean and how to improve.
+
+4. Share the Results (Optional):
+
+At the bottom of the report, you can click the "Send Results via WhatsApp 📤" button to easily share a summary with a client or friend.
+
+Troubleshooting: What to Do If Something Goes Wrong
+
+Problem: I click the "Calculate Results" button, but nothing happens.
+
+Solution 1: Check for Empty Fields. Make sure you have filled in every single box and selected an option from every dropdown. An empty field can stop the calculation. If a box is empty, it will be highlighted with a red border.
+
+Solution 2: Hard Refresh the Page. Your browser might have an old version of the file saved.
+
+On Windows: Press Ctrl + F5 at the same time.
+
+On Mac: Press Cmd + Shift + R at the same time.
+
+Then, try filling in the form and calculating again.
+
+Problem: The page looks plain and ugly (just black text on a white background).
+
+Solution: This usually means the style.css file is missing or in the wrong place. Make sure all three files (index.html, style.css, script.js) are in the exact same folder.
+
+Problem: I double-clicked index.html and it opened in Notepad or another text program.
+
+Solution: Your computer doesn't know to use a browser for this file.
+
+Right-click on the index.html file.
+
+Go to "Open with".
+
+Choose your web browser (Google Chrome, Firefox, etc.) from the list.
