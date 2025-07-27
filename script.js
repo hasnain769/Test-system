@@ -207,6 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function generateWhatsAppLink(r) {
         let message = `*Functional Test Results Summary* 🌟\n\n*Overall Score: ${r.overallScore.toFixed(1)}%* (${r.overallDescription})\n\n*Detailed Scores:*\n1. Cardio Endurance: ${r.test1.score.toFixed(1)}%\n2. Strength: ${r.test2.score.toFixed(1)}% ${r.test2.asymmetry ? '(Asymmetry!)' : ''}\n3. Muscle Endurance: ${r.test3.score.toFixed(1)}%\n4a. Flex (Legs): ${r.test4a.score.toFixed(1)}%\n4b. Flex (Arms): ${r.test4b.score.toFixed(1)}% ${r.test4b.asymmetry ? '(Asymmetry!)' : ''}\n5. Balance: ${r.test5.score.toFixed(1)}% ${r.test5.asymmetry ? '(Asymmetry!)' : ''}\n\n*Key Action:*\nCheck the detailed report for specific recommendations. Focus on improving areas with lower scores and addressing any detected asymmetry.`;
-        return `https://wa.me/?text=${encodeURIComponent(message)}`;
-    }
+        return `https://wa.me/+30661236633?text=${encodeURIComponent(message)}`;
+
 });
