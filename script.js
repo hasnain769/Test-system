@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('calculator-form');
     const resultsContainer = document.getElementById('results-container');
 
-    const ASYMMETRY_RECOMMENDATION = "Focus your efforts on the weaker side. Assess the innervation of the corresponding spinal segments, evaluate the activation and function of adjacent muscles, strengthen weakened muscles, and relieve muscle spasms or tension.<br><br><b>Recommendation:</b> Consultation with an osteopath or personal trainer is recommended to establish a foundation for health, safely improve results, and prevent injuries.";
+    const ASYMMETRY_RECOMMENDATION_HTML = "Focus your efforts on the weaker side. Assess the innervation of the corresponding spinal segments, evaluate the activation and function of adjacent muscles, strengthen weakened muscles, and relieve muscle spasms or tension.<br><br><b>Recommendation:</b> Consultation with an osteopath or personal trainer is recommended to establish a foundation for health, safely improve results, and prevent injuries.";
+    const ASYMMETRY_RECOMMENDATION_TEXT = "Focus your efforts on the weaker side. Assess the innervation of the corresponding spinal segments, evaluate the activation and function of adjacent muscles, strengthen weakened muscles, and relieve muscle spasms or tension.\n\n*Recommendation:* Consultation with an osteopath or personal trainer is recommended to establish a foundation for health, safely improve results, and prevent injuries.";
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return results;
     }
 
-    // --- INDIVIDUAL TEST CALCULATORS (WITH PERCENTAGE IN TITLE) ---
+    // --- INDIVIDUAL TEST CALCULATORS (WITH FINAL UPDATED THRESHOLDS) ---
 
     function calculateCardioEndurance(val) {
         let result;
@@ -200,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (asymmetricTests.length > 0) {
-            content += `<div class="final-asymmetry-warning"><b>Attention: Asymmetry in tests ${asymmetricTests.join(', ')}! ⚠️</b><p>${ASYMMETRY_RECOMMENDATION}</p></div>`;
+            content += `<div class="final-asymmetry-warning"><b>Attention: Asymmetry in tests ${asymmetricTests.join(', ')}! ⚠️</b><p>${ASYMMETRY_RECOMMENDATION_HTML}</p></div>`;
         }
 
         content += `<a href="${generateWhatsAppLink(r)}" target="_blank" class="whatsapp-btn">Send Results via WhatsApp 📤</a>`;
@@ -208,7 +209,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function generateWhatsAppLink(r) {
-        let message = `*Functional Test Results Summary* 🌟\n\n*Overall Score: ${r.overallScore.toFixed(1)}%* (${r.overallDescription})\n\n*Detailed Scores:*\n1. Cardio Endurance: ${r.test1.score.toFixed(1)}%\n2. Strength: ${r.test2.score.toFixed(1)}% ${r.test2.asymmetry ? '(Asymmetry!)' : ''}\n3. Muscle Endurance: ${r.test3.score.toFixed(1)}%\n4a. Flex (Legs): ${r.test4a.score.toFixed(1)}%\n4b. Flex (Arms): ${r.test4b.score.toFixed(1)}% ${r.test4b.asymmetry ? '(Asymmetry!)' : ''}\n5. Balance: ${r.test5.score.toFixed(1)}% ${r.test5.asymmetry ? '(Asymmetry!)' : ''}\n\n*Key Action:*\nCheck the detailed report for specific recommendations. Focus on improving areas with lower scores and addressing any detected asymmetry.`;
+        // Build the basic message
+        let message = `*Functional Test Results Summary* 🌟\n\n`;
+        message += `*Overall Score: ${r.overallScore.toFixed(1)}%* (${r.overallDescription})\n\n`;
+        message += `*Detailed Scores:*\n`;
+        message += `1. Cardio Endurance: ${r.test1.score.toFixed(1)}%\n`;
+        message += `2. Strength: ${r.test2.score.toFixed(1)}% ${r.test2.asymmetry ? '(Asymmetry!)' : ''}\n`;
+        message += `3. Muscle Endurance: ${r.test3.score.toFixed(1)}%\n`;
+        message += `4a. Flex (Legs): ${r.test4a.score.toFixed(1)}%\n`;
+        message += `4b. Flex (Arms): ${r.test4b.score.toFixed(1)}% ${r.test4b.asymmetry ? '(Asymmetry!)' : ''}\n`;
+        message += `5. Balance: ${r.test5.score.toFixed(1)}% ${r.test5.asymmetry ? '(Asymmetry!)' : ''}\n`;
+
+        // Add the new "Key Insights" section
+        message += `\n*Key Insights & Recommendations* 💡\n\n`;
+
+        const allTests = [
+            { name: "Cardiorespiratory Endurance", data: r.test1 },
+            { name: "Strength", data: r.test2 },
+            { name: "Muscle Endurance", data: r.test3 },
+            { name: "Flexibility (Legs)", data: r.test4a },
+            { name: "Flexibility (Arms/Shoulders)", data: r.test4b },
+            { name: "Balance", data: r.test5 }
+        ];
+
+        const hasAsymmetry = allTests.some(test => test.data.asymmetry);
+
+        if (hasAsymmetry) {
+            message += `*Primary Focus: Correcting Imbalance* ⚠️\n`;
+            message += `Your results show a significant difference between your left and right sides. It is highly recommended to focus on this first.\n\n`;
+            message += `*General Advice:*\n${ASYMMETRY_RECOMMENDATION_TEXT}`;
+        } else {
+            // Find the lowest scoring test if there is no asymmetry
+            const lowestTest = allTests.reduce((min, current) => current.data.score < min.data.score ? current : min, allTests[0]);
+            
+            message += `*Primary Focus: ${lowestTest.name}*\n`;
+            message += `This was your area with the most room for improvement. Focusing here will yield the greatest benefits.\n\n`;
+            message += `*Recommendation for ${lowestTest.name}:*\n`;
+            message += `*${lowestTest.data.title}*: ${lowestTest.data.detail.replace(/<br>/g, "\n")}`;
+            if (lowestTest.data.recommendation) {
+                message += `\n\n*Next Step:* ${lowestTest.data.recommendation}`;
+            }
+        }
+
         return `https://wa.me/?text=${encodeURIComponent(message)}`;
     }
 });
