@@ -54,27 +54,27 @@ document.addEventListener('DOMContentLoaded', () => {
         return results;
     }
 
-    // --- INDIVIDUAL TEST CALCULATORS (WITH FINAL UPDATED THRESHOLDS) ---
+    // --- INDIVIDUAL TEST CALCULATORS (WITH PERCENTAGE IN TITLE) ---
 
     function calculateCardioEndurance(val) {
         let result;
-        if (val >= 91) result = { score: 100, title: "Excellent", detail: "Excellent cardiorespiratory endurance. All types of activities are suitable for further training. Keep it up and maintain a high level of physical activity to preserve excellent shape.", recommendation: null };
-        else if (val >= 61) result = { score: 75, title: "Good", detail: "Excellent result at this level. To continue improvements, add yoga, functional exercises, and TRX training for comprehensive body work and improved flexibility.", recommendation: null };
-        else if (val >= 41) result = { score: 50, title: "Average", detail: "Initial level of cardiorespiratory endurance. For further progress, add breathing practices and endurance training, as well as start working with interval cardio sessions to increase endurance with heart rate control.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
-        else result = { score: 25, title: "Minimal", detail: "If values are below 30 seconds, it may indicate high stress, body inflammation, and low endurance levels; it is necessary to improve overall health. It is recommended to focus on increasing general physical fitness and including Cardio regular loads and breathing practices.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
+        if (val >= 91) result = { score: 100, title: "Excellent (100%)", detail: "Excellent cardiorespiratory endurance. All types of activities are suitable for further training. Keep it up and maintain a high level of physical activity to preserve excellent shape.", recommendation: null };
+        else if (val >= 61) result = { score: 75, title: "Good (75%)", detail: "Excellent result at this level. To continue improvements, add yoga, functional exercises, and TRX training for comprehensive body work and improved flexibility.", recommendation: null };
+        else if (val >= 41) result = { score: 50, title: "Average (50%)", detail: "Initial level of cardiorespiratory endurance. For further progress, add breathing practices and endurance training, as well as start working with interval cardio sessions to increase endurance with heart rate control.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
+        else result = { score: 25, title: "Minimal (25%)", detail: "If values are below 30 seconds, it may indicate high stress, body inflammation, and low endurance levels; it is necessary to improve overall health. It is recommended to focus on increasing general physical fitness and including Cardio regular loads and breathing practices.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
         return { ...result, value: `${val}s` };
     }
 
     function calculateStrength(rightVal, leftVal, gender) {
         const getResult = (value, g) => {
             const T = (g === 'male') ? { exc: 61, good: 46, avg: 36 } : { exc: 31, good: 26, avg: 21 };
-            if (value >= T.exc) return { score: 100, title: "Excellent", detail: "Excellent result! All types of activities are suitable for further physical fitness improvement. Maintain a high level of training, and continue developing your skills.", recommendation: null };
-            if (value >= T.good) return { score: 75, title: "Good", detail: "Good result, however it can be improved with gym, TRX and functional exercises. This will help develop strength, endurance, and improve overall physical fitness.", recommendation: null };
-            if (value >= T.avg) return { score: 50, title: "Average", detail: "Add strength training and learn to activate muscles more effectively. Work on engaging all muscle groups to improve results and progress.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
-            return { score: 25, title: "Minimal", detail: "Focus on muscle activation, functional, strength training, and myofascial release to relieve spasms, with an emphasis on relieving tension in the arms, neck, and trapezius muscles to prevent injuries and enhance performance.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
+            if (value >= T.exc) return { score: 100, title: "Excellent (100%)", detail: "Excellent result! All types of activities are suitable for further physical fitness improvement. Maintain a high level of training, and continue developing your skills.", recommendation: null };
+            if (value >= T.good) return { score: 75, title: "Good (75%)", detail: "Good result, however it can be improved with gym, TRX and functional exercises. This will help develop strength, endurance, and improve overall physical fitness.", recommendation: null };
+            if (value >= T.avg) return { score: 50, title: "Average (50%)", detail: "Add strength training and learn to activate muscles more effectively. Work on engaging all muscle groups to improve results and progress.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
+            return { score: 25, title: "Minimal (25%)", detail: "Focus on muscle activation, functional, strength training, and myofascial release to relieve spasms, with an emphasis on relieving tension in the arms, neck, and trapezius muscles to prevent injuries and enhance performance.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
         };
 
-        const asymmetryInfo = checkAsymmetry(rightVal, leftVal, 10); // Asymmetry is 10% for this test
+        const asymmetryInfo = checkAsymmetry(rightVal, leftVal, 10);
         const right = getResult(rightVal, gender);
         const left = getResult(leftVal, gender);
         const commonData = { value: `R: ${rightVal}kg, L: ${leftVal}kg`, score: (right.score + left.score) / 2 };
@@ -90,32 +90,32 @@ document.addEventListener('DOMContentLoaded', () => {
     function calculateCardioPulse(val) {
         const pulseMap = { 95: '90-100%', 85: '80-90%', 65: '60-70%', 55: '50-60%' };
         let result;
-        if (val <= 60) result = { score: 100, title: "Excellent", detail: "The heart’s response to load is excellent, you can increase the complexity of workouts. The body is well prepared and effectively handles loads without signs of overfatigue. Excellent adaptation allows for workouts without restrictions, but it is recommended to monitor the pulse in particularly complex workouts to ensure safety.", recommendation: null };
-        else if (val <= 70) result = { score: 75, title: "Good", detail: "The heart’s response to load is very good, the body is well prepared and effectively handles loads without signs of overfatigue. Good adaptation allows for intense workouts and practices without significant restrictions, but always consider individual sensations.", recommendation: null };
-        else if (val <= 90) result = { score: 50, title: "Average", detail: "The pulse response to load is average, indicating insufficient adaptation for more intense workouts. Need to improve adaptation and expand the program by adding endurance training, including resistance band exercises, cardio, breathing exercises, and TRX. Integrate more cardio and functional training for further progress.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
-        else result = { score: 25, title: "Minimal", detail: "The pulse response to load is elevated, which may indicate the need for additional attention to overall health and the cardiovascular system. It is recommended to carefully monitor the pulse during all intense workouts to avoid overloads. Include breathing exercises for improved recovery and light cardio sessions for gradual adaptation.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
+        if (val <= 60) result = { score: 100, title: "Excellent (100%)", detail: "The heart’s response to load is excellent, you can increase the complexity of workouts. The body is well prepared and effectively handles loads without signs of overfatigue. Excellent adaptation allows for workouts without restrictions, but it is recommended to monitor the pulse in particularly complex workouts to ensure safety.", recommendation: null };
+        else if (val <= 70) result = { score: 75, title: "Good (75%)", detail: "The heart’s response to load is very good, the body is well prepared and effectively handles loads without signs of overfatigue. Good adaptation allows for intense workouts and practices without significant restrictions, but always consider individual sensations.", recommendation: null };
+        else if (val <= 90) result = { score: 50, title: "Average (50%)", detail: "The pulse response to load is average, indicating insufficient adaptation for more intense workouts. Need to improve adaptation and expand the program by adding endurance training, including resistance band exercises, cardio, breathing exercises, and TRX. Integrate more cardio and functional training for further progress.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
+        else result = { score: 25, title: "Minimal (25%)", detail: "The pulse response to load is elevated, which may indicate the need for additional attention to overall health and the cardiovascular system. It is recommended to carefully monitor the pulse during all intense workouts to avoid overloads. Include breathing exercises for improved recovery and light cardio sessions for gradual adaptation.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
         return { ...result, value: `Zone ${pulseMap[val] || 'N/A'}` };
     }
     
     function calculateFlexibilityLegs(val) {
         const textMap = { 25: 'Reach to knee', 50: 'Reach to shin/foot', 75: 'Reach to floor (fists)', 100: 'Reach to floor (palms)' };
         let result;
-        if (val === 100) result = { score: 100, title: "Excellent", detail: "Excellent flexibility! Keep it up. If there is hypermobility, it is recommended to additionally strengthen muscles to maintain stability and prevent injuries.", recommendation: null };
-        else if (val === 75) result = { score: 75, title: "Good", detail: "Continue developing flexibility by adding more complex stretching workouts and functional exercises to improve mobility and strengthen muscles.", recommendation: null };
-        else if (val === 50) result = { score: 50, title: "Average", detail: "It is recommended to include practices for relieving muscle clamps and injury prevention: myofascial release (MFR), massage, yoga, and somatic methods to increase flexibility and mobility.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
-        else result = { score: 25, title: "Minimal", detail: "Possible issues with posture, innervation, or past legs injuries. Regular massage, basic stretching exercises, and gentle yoga are recommended to enhance flexibility and relieve muscle tension.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
+        if (val === 100) result = { score: 100, title: "Excellent (100%)", detail: "Excellent flexibility! Keep it up. If there is hypermobility, it is recommended to additionally strengthen muscles to maintain stability and prevent injuries.", recommendation: null };
+        else if (val === 75) result = { score: 75, title: "Good (75%)", detail: "Continue developing flexibility byadding more complex stretching workouts and functional exercises to improve mobility and strengthen muscles.", recommendation: null };
+        else if (val === 50) result = { score: 50, title: "Average (50%)", detail: "It is recommended to include practices for relieving muscle clamps and injury prevention: myofascial release (MFR), massage, yoga, and somatic methods to increase flexibility and mobility.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
+        else result = { score: 25, title: "Minimal (25%)", detail: "Possible issues with posture, innervation, or past legs injuries. Regular massage, basic stretching exercises, and gentle yoga are recommended to enhance flexibility and relieve muscle tension.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
         return { ...result, value: textMap[val] };
     }
 
     function calculateFlexibilityArms(rightVal, leftVal) {
         const getResult = (value) => {
-            if (value >= 100) return { score: 100, title: "Excellent", detail: "Excellent flexibility and neuromuscular coordination. Maintain your current routine and include controlled strength and mobility training. If hypermobility is present, additional muscle strengthening is recommended to ensure stability and prevent injuries.", recommendation: null };
-            if (value >= 75) return { score: 75, title: "Good", detail: "You demonstrate good shoulder mobility and flexibility. Continue improving by incorporating functional training (e.g., TRX, yoga) and more advanced flexibility exercises while maintaining safe technique.", recommendation: null };
-            if (value >= 50) return { score: 50, title: "Average", detail: "Incorporate myofascial release (MFR), massage, yoga, and exercises to relieve muscle tension and activate stabilizing muscles. This will enhance flexibility and help prevent injuries.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
-            return { score: 25, title: "Minimal", detail: "Possible issues with posture, innervation, or past shoulder injuries. Regular massage, basic stretching exercises, gentle yoga, and gentle mobility work will help restore range of motion and reduce muscle tension.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
+            if (value >= 100) return { score: 100, title: "Excellent (100%)", detail: "Excellent flexibility and neuromuscular coordination. Maintain your current routine and include controlled strength and mobility training. If hypermobility is present, additional muscle strengthening is recommended to ensure stability and prevent injuries.", recommendation: null };
+            if (value >= 75) return { score: 75, title: "Good (75%)", detail: "You demonstrate good shoulder mobility and flexibility. Continue improving by incorporating functional training (e.g., TRX, yoga) and more advanced flexibility exercises while maintaining safe technique.", recommendation: null };
+            if (value >= 50) return { score: 50, title: "Average (50%)", detail: "Incorporate myofascial release (MFR), massage, yoga, and exercises to relieve muscle tension and activate stabilizing muscles. This will enhance flexibility and help prevent injuries.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
+            return { score: 25, title: "Minimal (25%)", detail: "Possible issues with posture, innervation, or past shoulder injuries. Regular massage, basic stretching exercises, gentle yoga, and gentle mobility work will help restore range of motion and reduce muscle tension.", recommendation: "Consultation with an osteopath or personal trainer is recommended to build a strong foundation for health, safely improve results, and prevent injuries." };
         };
         const valueMap = { 25: "Fingers do not touch", 50: "Fingers touch but do not clasp", 75: "Fingers form a weak clasp", 100: "Fingers form a strong, full clasp" };
-        const asymmetryInfo = checkAsymmetry(rightVal, leftVal, 25); // Asymmetry is 25% for this test
+        const asymmetryInfo = checkAsymmetry(rightVal, leftVal, 25);
         const right = getResult(rightVal);
         const left = getResult(leftVal);
         const commonData = { value: `R: ${valueMap[rightVal]}, L: ${valueMap[leftVal]}`, score: (right.score + left.score) / 2 };
@@ -130,12 +130,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function calculateBalance(rightVal, leftVal) {
         const getResult = (value) => {
-            if (value >= 51) return { score: 100, title: "Excellent", detail: "Your balance is at the highest level! All types of activities are suitable. Maintain this level and continue training to improve stabilization.", recommendation: null };
-            if (value >= 41) return { score: 75, title: "Good", detail: "Excellent result, you can move to more complex training programs. Add more complex yoga and TRX for further strengthening of muscles and improvement of balance.", recommendation: null };
-            if (value >= 31) return { score: 50, title: "Average", detail: "For further progress, add balance exercises, as well as work with stabilizer muscles to improve coordination and maintain stability.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
-            return { score: 25, title: "Minimal", detail: "It is recommended to consult an osteopath or personal trainer to check the function of the leg and foot muscles. Focus on stabilizing and activating the muscles in the feet, toes, and shins to relieve spasms. Incorporating yoga can further enhance balance and strengthen muscles.", recommendation: "Consulting an osteopath or personal trainer is advised to build a solid foundation for health, safely improve results, and prevent injuries." };
+            if (value >= 51) return { score: 100, title: "Excellent (100%)", detail: "Your balance is at the highest level! All types of activities are suitable. Maintain this level and continue training to improve stabilization.", recommendation: null };
+            if (value >= 41) return { score: 75, title: "Good (75%)", detail: "Excellent result, you can move to more complex training programs. Add more complex yoga and TRX for further strengthening of muscles and improvement of balance.", recommendation: null };
+            if (value >= 31) return { score: 50, title: "Average (50%)", detail: "For further progress, add balance exercises, as well as work with stabilizer muscles to improve coordination and maintain stability.", recommendation: "It is recommended to consult an osteopath or personal trainer to safely improve results." };
+            return { score: 25, title: "Minimal (25%)", detail: "It is recommended to consult an osteopath or personal trainer to check the function of the leg and foot muscles. Focus on stabilizing and activating the muscles in the feet, toes, and shins to relieve spasms. Incorporating yoga can further enhance balance and strengthen muscles.", recommendation: "Consulting an osteopath or personal trainer is advised to build a solid foundation for health, safely improve results, and prevent injuries." };
         };
-        const asymmetryInfo = checkAsymmetry(rightVal, leftVal, 10); // Asymmetry is 10% for this test
+        const asymmetryInfo = checkAsymmetry(rightVal, leftVal, 10);
         const right = getResult(rightVal);
         const left = getResult(leftVal);
         const commonData = { value: `R: ${rightVal}s, L: ${leftVal}s`, score: (right.score + left.score) / 2 };
@@ -209,6 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function generateWhatsAppLink(r) {
         let message = `*Functional Test Results Summary* 🌟\n\n*Overall Score: ${r.overallScore.toFixed(1)}%* (${r.overallDescription})\n\n*Detailed Scores:*\n1. Cardio Endurance: ${r.test1.score.toFixed(1)}%\n2. Strength: ${r.test2.score.toFixed(1)}% ${r.test2.asymmetry ? '(Asymmetry!)' : ''}\n3. Muscle Endurance: ${r.test3.score.toFixed(1)}%\n4a. Flex (Legs): ${r.test4a.score.toFixed(1)}%\n4b. Flex (Arms): ${r.test4b.score.toFixed(1)}% ${r.test4b.asymmetry ? '(Asymmetry!)' : ''}\n5. Balance: ${r.test5.score.toFixed(1)}% ${r.test5.asymmetry ? '(Asymmetry!)' : ''}\n\n*Key Action:*\nCheck the detailed report for specific recommendations. Focus on improving areas with lower scores and addressing any detected asymmetry.`;
-        return `https://wa.me/+30661236633?text=${encodeURIComponent(message)}`;
+        return `https://wa.me/?text=${encodeURIComponent(message)}`;
     }
 });
